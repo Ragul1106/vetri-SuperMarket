@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.avif';
-import homeIcon from '../assets/home.png';
+import homeIcon from '../assets/Home.png';
 import productsIcon from '../assets/products.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -74,7 +74,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Topbar */}
       <div className="d-md-none bg-light border-bottom p-2 shadow-sm fixed-top" style={{ zIndex: 1050 }}>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-2">
