@@ -82,7 +82,7 @@ const CustomerForm = ({ customer, setCustomer }) => {
               <BsPencil />
             </button>
           ) : (
-            <button onClick={handleSave} className="btn btn-success w-100 w-md-auto">
+            <button onClick={handleSave} className="btn btn-primary w-100 w-md-auto">
               Save
             </button>
           )}
