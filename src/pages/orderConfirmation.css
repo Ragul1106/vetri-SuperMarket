@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+}
+
+.order-confirm {
+  background-color: #d9f6dc;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 970px;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .order-confirm {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .order-confirm button.btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .info-box {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .order-container {
+    margin-left: 0 !important;
+    padding: 2px;
+  }
+
+  .info-box .fw-bold {
+    font-size: 15px;
+  }
+
+  .info-box .fw-normal {
+    font-size: 15px;
+  }
+
+  .order-confirm button.btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
