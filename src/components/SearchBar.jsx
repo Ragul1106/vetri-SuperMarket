@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaShoppingCart } from 'react-icons/fa';
+
 import SearchIcon from '../assets/search.png';
 import BarCode from '../assets/bar code.png';
 import Mic from '../assets/mic.png';
@@ -15,6 +17,7 @@ const productsList = [
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const [foundItem, setFoundItem] = useState(null);
+  const [notFound, setNotFound] = useState(false);
 
   const handleSearch = () => {
     const searchText = search.trim().toLowerCase();
@@ -22,7 +25,13 @@ const SearchBar = () => {
       (p) => p.name.trim().toLowerCase() === searchText
     );
 
-    setFoundItem(matchedItem || null);
+    if (matchedItem) {
+      setFoundItem(matchedItem);
+      setNotFound(false);
+    } else {
+      setFoundItem(null);
+      setNotFound(true);
+    }
   };
 
   const handleAddToCart = () => {
@@ -47,12 +56,13 @@ const SearchBar = () => {
     alert(`${foundItem.name} added to item list.`);
     setSearch('');
     setFoundItem(null);
+    setNotFound(false);
   };
 
   return (
     <div className="w-100">
       <div className="d-flex flex-wrap align-items-center gap-2">
-        <div className="input-group flex-grow-1" style={{ minWidth: '250px' }}>
+        <div className="input-group flex-grow-1 shadow-sm rounded" style={{ minWidth: '250px' }}>
           <span className="input-group-text bg-white border-end-0">
             <img src={SearchIcon} alt="search" width="20" height="20" />
           </span>
@@ -60,7 +70,7 @@ const SearchBar = () => {
           <input
             type="text"
             className="form-control border-start-0 border-end-0 p-2"
-            placeholder="Search"
+            placeholder="Search products"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -76,14 +86,41 @@ const SearchBar = () => {
         </div>
       </div>
 
+      {notFound && (
+        <div className="text-danger mt-3 fw-semibold">
+          No matching product found.
+        </div>
+      )}
+
       {foundItem && (
-        <div className="mt-3 border rounded p-3 bg-light">
-          <h6 className="fw-bold text-success">{foundItem.name}</h6>
-          <p className="mb-1">Rate: ₹{foundItem.rate}</p>
-          <p className="mb-1">Tax: ₹{foundItem.tax}</p>
-          <button className="btn btn-sm btn-primary mt-2" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
+        <div className="mt-4 animate__animated animate__fadeIn">
+          <div className="card shadow-sm border-0 bg-light-subtle">
+            <div className="card-body">
+              <h5 className="card-title text-primary fw-bold text-capitalize">{foundItem.name}</h5>
+              <div className="d-flex gap-3 flex-wrap">
+                <span className="badge bg-success">Rate: ₹{foundItem.rate}</span>
+                <span className="badge bg-warning text-dark">Tax: ₹{foundItem.tax}</span>
+                <span className="badge bg-secondary">Qty: {foundItem.quantity}</span>
+              </div>
+              <p className="mt-2 mb-0 text-muted">
+                Total: ₹{foundItem.quantity * foundItem.rate + foundItem.tax}
+              </p>
+              <button
+                className="btn btn-sm mt-3 rounded-circle d-flex align-items-center justify-content-center"
+                style={{
+                  backgroundColor: '#f77c3e',
+                  color: 'white',
+                  width: '36px',
+                  height: '36px',
+                  transition: '0.3s',
+                }}
+                onClick={handleAddToCart}
+                title="Add to Cart"
+              >
+                <FaShoppingCart />
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

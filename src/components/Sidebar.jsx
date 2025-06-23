@@ -35,7 +35,7 @@ const Sidebar = () => {
   const SidebarContent = () => (
     <div
       className="p-3 d-flex flex-column"
-      style={{ width: '220px', backgroundColor: 'skyblue', minHeight: '100vh' }}
+      style={{ width: '220px', backgroundColor: '#B3D9FF   ', minHeight: '100vh' }}
     >
       <div style={commonRowStyle}>
         <img src={logo} alt="Logo" className="rounded-circle" style={iconStyleLarge} />
@@ -47,7 +47,7 @@ const Sidebar = () => {
         style={({ isActive }) => ({
           ...commonRowStyle,
           textDecoration: 'none',
-          color: isActive ? 'orangered' : '#000',
+          color: isActive ? '#f88e55' : '#000',
           fontWeight: isActive ? 'bold' : 'normal',
         })}
         onClick={() => setShow(false)}
@@ -61,7 +61,7 @@ const Sidebar = () => {
         style={({ isActive }) => ({
           ...commonRowStyle,
           textDecoration: 'none',
-          color: isActive ? 'orangered' : '#000',
+          color: isActive ? '#f88e55' : '#000',
           fontWeight: isActive ? 'bold' : 'normal',
         })}
         onClick={() => setShow(false)}

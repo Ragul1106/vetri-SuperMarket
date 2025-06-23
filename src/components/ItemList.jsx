@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+import { BsFillTrash3Fill } from "react-icons/bs";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -41,7 +42,7 @@ const ItemList = () => {
 
   return (
     <div className="mt-4">
-      <div className="d-none  d-md-flex border border-dark bg-light text-primary fw-bold text-center rounded">
+      <div className="d-none  d-md-flex border border-dark bg-light fw-bold text-center rounded" style={{color:"blue"}}>
         {headers.map((header, i) => (
           <div
             key={i}
@@ -92,7 +93,7 @@ const ItemList = () => {
                <strong className="d-md-none me-2">Amount:</strong>{item.amount}</div>
 
             <div className="text-center w-100 w-md-16">
-              <FaTrash
+              <BsFillTrash3Fill
                 onClick={() => deleteItem(index)}
                 style={{ cursor: 'pointer', color: 'red' }}
                 title="Delete item"

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../assets/card.png'
-import Cash from '../assets/cash.png'
+import { HiCheck } from "react-icons/hi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Card from '../assets/card.png';
+import Cash from '../assets/cash.png';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
@@ -39,17 +43,17 @@ const PaymentPage = () => {
 
   const handlePayment = () => {
     if (!paymentType) {
-      alert('Please select a payment method (Cash or Card).');
+      toast.warn('Please select a payment method (Cash or Card).');
       return;
     }
     if (!receivedAmount) {
-      alert('Please enter the amount received.');
-      return navigate('/payment')
+      toast.error('Please enter the amount received.');
+      return navigate('/payment');
     }
-     if (parseFloat(receivedAmount) < parseFloat(totalAmount)) {
-    alert('Received amount must be greater than or equal to the collected amount.');
-    return;
-  }
+    if (parseFloat(receivedAmount) < parseFloat(totalAmount)) {
+      toast.error('Received amount must be greater than or equal to the collected amount.');
+      return;
+    }
 
     navigate('/order-complete');
   };
@@ -66,7 +70,7 @@ const PaymentPage = () => {
       totalAmount,
     };
     console.log('Draft Saved:', draft);
-    alert('Draft Saved Successfully!');
+    toast.success('Draft Saved Successfully!');
   };
 
   const handleSave = () => {
@@ -82,7 +86,7 @@ const PaymentPage = () => {
     };
 
     localStorage.setItem('savedPayment', JSON.stringify(savedData));
-    alert('Payment data saved to localStorage!');
+    toast.success('Payment data saved to localStorage!');
   };
 
   return (
@@ -113,7 +117,6 @@ const PaymentPage = () => {
 
       <div className="d-flex justify-content-between align-items-center mt-3 mb-4" style={{ maxWidth: '100%' }}>
         <div className="d-flex flex-column me-3 gap-3" style={{ flex: 1 }}>
-
           <div className="d-flex align-items-center gap-2">
             <div
               className="rounded-circle d-flex justify-content-center align-items-center"
@@ -127,10 +130,12 @@ const PaymentPage = () => {
               <img src={Cash} alt="cash" style={{ width: '16px', height: '16px' }} />
             </div>
             <button
-              className={`btn flex-grow-1 ${paymentType === 'CASH' ? 'btn-primary text-white fw-bold' : 'btn-outline-warning'}`} style={{ border: "1px solid blue", color: "black" }}
+              className="btn d-flex justify-content-between align-items-center flex-grow-1"
+              style={{ border: "1px solid blue", color: "black" }}
               onClick={() => setPaymentType('CASH')}
             >
-              CASH
+              <span>CASH</span>
+              {paymentType === 'CASH' && <HiCheck className="ms-2 fs-4" style={{ color: "#f88e55" }} />}
             </button>
           </div>
 
@@ -147,16 +152,18 @@ const PaymentPage = () => {
               <img src={Card} alt="card" style={{ width: '16px', height: '16px' }} />
             </div>
             <button
-              className={`btn flex-grow-1  ${paymentType === 'CARD' ? 'btn-primary text-white fw-bold' : 'btn-outline-warning'}`} style={{ border: "1px solid blue", color: "black" }}
+              className="btn d-flex justify-content-between align-items-center flex-grow-1"
+              style={{ border: "1px solid blue", color: "black" }}
               onClick={() => setPaymentType('CARD')}
             >
-              CARD
+              <span>CARD</span>
+              {paymentType === 'CARD' && <HiCheck className="ms-2 fs-4" style={{ color: "#f88e55" }} />}
             </button>
           </div>
         </div>
 
         <div style={{ flex: 1 }}>
-          <fieldset className="rounded px-3" style={{border:"1px solid blue"}} >
+          <fieldset className="rounded px-3" style={{ border: "1px solid blue" }} >
             <legend className="float-none w-auto px-2 fs-6" >Received Amount</legend>
             <input
               type="number"
@@ -167,7 +174,6 @@ const PaymentPage = () => {
             />
           </fieldset>
         </div>
-
       </div>
 
       <div className="border-top pt-3">
@@ -191,9 +197,22 @@ const PaymentPage = () => {
       </div>
 
       <div className="d-flex justify-content-between mt-4">
-        <button className="btn btn-outline-warning fw-bold" onClick={handleSave}>Save</button>
+        <button className="btn text-light fw-bold" style={{ backgroundColor: '#f88e55' }} onClick={handleSave}>Save</button>
         <button className="btn btn-primary fw-bold" onClick={handlePayment}>Payment</button>
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

@@ -1,6 +1,12 @@
+body {
+  font-family: 'Outfit', sans-serif;
+}
+
 .received-input:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-
+.bg-light-subtle {
+  background: linear-gradient(to right, #faf9fa, #274678);
+}

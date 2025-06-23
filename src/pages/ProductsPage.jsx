@@ -139,7 +139,7 @@ const ProductsPage = () => {
       <div className="text-center mt-4">
         <button
           className="btn px-5 py-2 fw-bold"
-          style={{ backgroundColor: '#f77c3e', color: 'white', marginBottom:"20px" }}
+          style={{ backgroundColor: '#f88e55', color: 'white', marginBottom:"20px" }}
           onClick={handleNext}
         >
           Next

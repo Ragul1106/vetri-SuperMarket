@@ -1,6 +1,7 @@
 import React from 'react';
 import ThankyouImage from '../assets/thank you.png';
 import { useNavigate } from 'react-router-dom';
+import { TbHomeMove } from "react-icons/tb";
 
 const ThankYouPage = () => {
   const navigate = useNavigate();
@@ -18,10 +19,12 @@ const ThankYouPage = () => {
       <p className="text-muted">Your order has been placed successfully.</p>
 
       <button
-        className="btn btn-primary mt-3 px-4 py-2"
+        className="btn text-white fw-bold fs-2 px-4"
+                style={{ backgroundColor: '#f88e55' }}
         onClick={() => navigate('/')}
+        title='Back to home'
       >
-        Back to Home
+        <TbHomeMove />
       </button>
     </div>
   );

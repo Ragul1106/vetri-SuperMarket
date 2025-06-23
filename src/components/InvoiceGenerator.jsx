@@ -70,7 +70,8 @@ const InvoiceGenerator = () => {
           </div>
         </div>
 
-        <hr />
+        <hr style={{ borderTop: '2px solid darkgreen' }} />
+
 
         <div className="d-flex flex-column flex-md-row justify-content-between">
           <div>
@@ -86,31 +87,44 @@ const InvoiceGenerator = () => {
           </div>
         </div>
 
-        <table className="table table-bordered mt-4 text-center align-middle">
-          <thead className="table-light">
-            <tr>
-              <th>Description</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item, idx) => (
-              <tr key={idx}>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>{item.rate}</td>
-                <td>{item.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <table
+  className="table mt-4 text-center align-middle"
+  style={{
+    width: '100%',
+    border: '2px solid limegreen',
+    borderCollapse: 'collapse',
+  }}
+>
+  <thead>
+    <tr style={{ borderBottom: '2px solid limegreen' }}>
+      <th style={{ borderRight: '2px solid limegreen', padding: '10px' }}>Description</th>
+      <th style={{ borderRight: '2px solid limegreen', padding: '10px' }}>Quantity</th>
+      <th style={{ borderRight: '2px solid limegreen', padding: '10px' }}>Price</th>
+      <th style={{ padding: '10px' }}>Total Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {items.map((item, idx) => (
+      <tr
+        key={idx}
+        style={{
+          borderBottom: idx === items.length - 1 ? '2px solid limegreen' : 'none',
+        }}
+      >
+        <td style={{ borderRight: '2px solid limegreen', borderBottom:'none', padding: '8px' }}>{item.name}</td>
+        <td style={{  borderRight: '2px solid limegreen', borderBottom:'none', padding: '8px' }}>{item.quantity}</td>
+        <td style={{  borderRight: '2px solid limegreen', borderBottom:'none', padding: '8px' }}>{item.rate}</td>
+        <td style={{  borderRight: '2px solid limegreen', borderBottom:'none', padding: '8px' }}>{item.amount}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
 
         <h5 className="text-end mt-4"><b>Total</b>: ₹ {totalAmount.toFixed(2)}</h5>
       </div>
 
-      <div className="text-center mt-4">
+      <div className="text-center mt-4 mb-4">
         <button
           className="btn text-white fw-bold"
           style={{ backgroundColor: '#f77c3e' }}
